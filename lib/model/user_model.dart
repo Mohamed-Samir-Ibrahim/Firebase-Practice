@@ -1,0 +1,14 @@
+class UserModel {
+  String? uid;
+
+  UserModel({this.uid});
+}
+
+class UserData {
+  String? uid;
+  String? name;
+  String? sugar;
+  int? strength;
+
+  UserData({this.uid, this.name, this.sugar, this.strength});
+}
