@@ -1,4 +1,4 @@
-import 'package:firebase_practice/core/constants.dart';
+import 'package:firebase_practice/screen/custom_text_form_field.dart';
 import 'package:firebase_practice/screen/loading.dart';
 import 'package:firebase_practice/service/auth_service.dart';
 import 'package:firebase_practice/service/secure_storage_service.dart';
@@ -87,30 +87,28 @@ class _SignInState extends State<SignIn> {
                 crossAxisAlignment: .start,
                 mainAxisAlignment: .center,
                 children: [
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(hintText: 'Email'),
-                    validator: (value) =>
-                        value!.isEmpty ? 'Please enter your email' : null,
+                  CustomTextFormField(
                     onChanged: (value) {
                       setState(() {
                         email = value;
                       });
                     },
+                    validator: (value) =>
+                        value!.isEmpty ? 'Please enter your email' : null,
+                    hintText: 'Email',
                   ),
                   SizedBox(height: 15),
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(
-                      hintText: 'Password',
-                    ),
-                    validator: (value) => value!.length < 6
-                        ? 'Please enter password 6+ char long'
-                        : null,
-                    obscureText: true,
+                  CustomTextFormField(
                     onChanged: (value) {
                       setState(() {
                         password = value;
                       });
                     },
+                    validator: (value) => value!.length < 6
+                        ? 'Please enter password 6+ char long'
+                        : null,
+                    hintText: 'Password',
+                    obscureText: true,
                   ),
                   SizedBox(height: 10),
                   Padding(

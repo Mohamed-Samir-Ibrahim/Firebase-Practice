@@ -21,9 +21,9 @@ class DatabaseService {
   List<BrewModel> brewsList(QuerySnapshot snapshot) {
     return snapshot.docChanges.map((doc) {
       return BrewModel(
-        name: doc.doc['name'] ?? '',
+        name: doc.doc['name'] ?? 'New Crew User',
         strength: doc.doc['strength'] ?? 0,
-        sugar: doc.doc['sugar'] ?? '',
+        sugar: doc.doc['sugar'] ?? '100',
       );
     }).toList();
   }

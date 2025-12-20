@@ -1,4 +1,4 @@
-import 'package:firebase_practice/core/constants.dart';
+import 'package:firebase_practice/screen/custom_text_form_field.dart';
 import 'package:firebase_practice/screen/loading.dart';
 import 'package:firebase_practice/service/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +58,7 @@ class _SignUpState extends State<SignUp> {
                 crossAxisAlignment: .start,
                 mainAxisAlignment: .center,
                 children: [
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(hintText: 'Email'),
+                  CustomTextFormField(
                     onChanged: (value) {
                       setState(() {
                         email = value;
@@ -67,13 +66,10 @@ class _SignUpState extends State<SignUp> {
                     },
                     validator: (value) =>
                         value!.isEmpty ? 'Please enter your email' : null,
+                    hintText: 'Email',
                   ),
                   SizedBox(height: 15),
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(
-                      hintText: 'Password',
-                    ),
-                    obscureText: true,
+                  CustomTextFormField(
                     onChanged: (value) {
                       setState(() {
                         password = value;
@@ -82,6 +78,8 @@ class _SignUpState extends State<SignUp> {
                     validator: (value) => value!.length < 6
                         ? 'Please enter password 6+ char long'
                         : null,
+                    hintText: 'Password',
+                    obscureText: true,
                   ),
                   SizedBox(height: 15),
                   ElevatedButton(
