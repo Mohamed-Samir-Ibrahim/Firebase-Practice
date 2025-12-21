@@ -1,5 +1,6 @@
 import 'package:firebase_practice/core/constants.dart';
 import 'package:firebase_practice/model/user_model.dart';
+import 'package:firebase_practice/screen/custom_button.dart';
 import 'package:firebase_practice/screen/custom_text_form_field.dart';
 import 'package:firebase_practice/screen/loading.dart';
 import 'package:firebase_practice/service/database_service.dart';
@@ -81,10 +82,7 @@ class _SettingsFormState extends State<SettingsForm> {
                       setState(() => currentStrength = val.round()),
                 ),
                 const SizedBox(height: 20.0),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.pink[400]),
-                  ),
+                CustomButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       await DatabaseService(uid: provider?.uid).updateUserData(
@@ -95,6 +93,7 @@ class _SettingsFormState extends State<SettingsForm> {
                       Navigator.pop(context);
                     }
                   },
+                  backgroundColor: WidgetStatePropertyAll(Colors.pink[400]),
                   child: const Text(
                     'Update',
                     style: TextStyle(color: Colors.white),
