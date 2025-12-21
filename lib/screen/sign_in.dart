@@ -1,3 +1,4 @@
+import 'package:firebase_practice/screen/custom_button.dart';
 import 'package:firebase_practice/screen/custom_text_form_field.dart';
 import 'package:firebase_practice/screen/loading.dart';
 import 'package:firebase_practice/service/auth_service.dart';
@@ -128,7 +129,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   SizedBox(height: 15),
-                  ElevatedButton(
+                  CustomButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         setState(() {
@@ -163,12 +164,8 @@ class _SignInState extends State<SignIn> {
                         }
                       }
                     },
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(
-                        Colors.brown[400],
-                      ),
-                    ),
-                    child: Text(
+                    backgroundColor: WidgetStatePropertyAll(Colors.brown[400]),
+                    child: const Text(
                       'Sign In',
                       style: TextStyle(color: Colors.white),
                     ),
