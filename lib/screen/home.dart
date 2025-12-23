@@ -23,8 +23,12 @@ class _HomeState extends State<Home> {
       final user = Provider.of<UserModel?>(context, listen: false);
       return showModalBottomSheet(
         context: context,
+        isScrollControlled: true, // ⭐ مهم جدًا
         builder: (context) {
-          return Provider<UserModel?>.value(value: user, child: SettingsForm());
+          return Provider<UserModel?>.value(
+            value: user,
+            child: const SettingsForm(),
+          );
         },
       );
     }

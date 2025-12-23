@@ -39,67 +39,76 @@ class _SettingsFormState extends State<SettingsForm> {
         UserData? userData = snapshot.data;
 
         return Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Update your brew settings',
-                  style: TextStyle(fontSize: 18.0),
-                ),
-                const SizedBox(height: 20.0),
-                CustomTextFormField(
-                  onChanged: (val) => setState(() => currentName = val),
-                  validator: (val) =>
-                      val!.isEmpty ? 'Please enter a name' : null,
-                  hintText: 'Name',
-                  initialValue: userData?.name ?? '',
-                ),
-                const SizedBox(height: 20.0),
-                DropdownButtonFormField<String>(
-                  initialValue: currentSugar ?? userData?.sugar ?? '0',
-                  decoration: textInputDecoration,
-                  items: sugars.map((sugar) {
-                    return DropdownMenuItem(
-                      value: sugar,
-                      child: Text('$sugar sugars'),
-                    );
-                  }).toList(),
-                  onChanged: (val) => setState(() => currentSugar = val),
-                ),
-                const SizedBox(height: 20.0),
-                Slider(
-                  value: (currentStrength ?? userData?.strength ?? 100)
-                      .toDouble(),
-                  min: 100.0,
-                  max: 900.0,
-                  divisions: 8,
-                  activeColor: Colors
-                      .brown[currentStrength ?? userData?.strength ?? 100],
-                  onChanged: (val) =>
-                      setState(() => currentStrength = val.round()),
-                ),
-                const SizedBox(height: 20.0),
-                CustomButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await DatabaseService(uid: provider?.uid).updateUserData(
-                        currentSugar ?? userData?.sugar ?? '0',
-                        currentName ?? userData?.name ?? 'New Crew User',
-                        currentStrength ?? userData?.strength ?? 100,
-                      );
-                      Navigator.pop(context);
-                    }
-                  },
-                  backgroundColor: WidgetStatePropertyAll(Colors.pink[400]),
-                  child: const Text(
-                    'Update',
-                    style: TextStyle(color: Colors.white),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            left: 20,
+            right: 20,
+            top: 20,
+          ),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Update your brew settings',
+                    style: TextStyle(fontSize: 18.0),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(
+                    onChanged: (val) => setState(() => currentName = val),
+                    validator: (val) =>
+                        val!.isEmpty ? 'Please enter a name' : null,
+                    hintText: 'Name',
+                    initialValue: userData?.name ?? '',
+                  ),
+                  const SizedBox(height: 20.0),
+                  DropdownButtonFormField<String>(
+                    initialValue: currentSugar ?? userData?.sugar ?? '0',
+                    decoration: textInputDecoration,
+                    items: sugars.map((sugar) {
+                      return DropdownMenuItem(
+                        value: sugar,
+                        child: Text('$sugar sugars'),
+                      );
+                    }).toList(),
+                    onChanged: (val) => setState(() => currentSugar = val),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Slider(
+                    value: (currentStrength ?? userData?.strength ?? 100)
+                        .toDouble(),
+                    min: 100.0,
+                    max: 900.0,
+                    divisions: 8,
+                    activeColor: Colors
+                        .brown[currentStrength ?? userData?.strength ?? 100],
+                    onChanged: (val) =>
+                        setState(() => currentStrength = val.round()),
+                  ),
+                  const SizedBox(height: 20.0),
+                  CustomButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await DatabaseService(
+                          uid: provider?.uid,
+                        ).updateUserData(
+                          currentSugar ?? userData?.sugar ?? '0',
+                          currentName ?? userData?.name ?? 'New Crew User',
+                          currentStrength ?? userData?.strength ?? 100,
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
+                    backgroundColor: WidgetStatePropertyAll(Colors.pink[400]),
+                    child: const Text(
+                      'Update',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
